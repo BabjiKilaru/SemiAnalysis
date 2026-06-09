@@ -30,18 +30,18 @@ Open [http://localhost:3000](http://localhost:3000).
 
 ## Live deployment
 
-The Next.js prototype is deployed on Vercel:
+The Next.js prototype is deployed on Vercel and **auto-deploys on every push to `main`**:
 
 **https://prototype-black-ten.vercel.app**
 
-To redeploy after changes:
+GitHub repo: [BabjiKilaru/SemiAnalysis](https://github.com/BabjiKilaru/SemiAnalysis) → Vercel project `prototype` (root directory: `prototype/`)
+
+To redeploy manually:
 
 ```bash
 cd prototype
 npx vercel --prod
 ```
-
-To enable automatic deploys on every `git push`, connect the GitHub repo in the [Vercel dashboard](https://vercel.com/dashboard) (Settings → Git → connect `BabjiKilaru/SemiAnalysis`, root directory: `prototype`).
 
 ## Quick start — WordPress (LocalWP)
 
