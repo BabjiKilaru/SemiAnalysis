@@ -1,0 +1,24 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "sa/cta-band",
+  "title": "SA CTA Band",
+  "category": "semianalysis",
+  "icon": "megaphone",
+  "description": "Conversion call-to-action band.",
+  "supports": { "html": false },
+  "attributes": {
+    "title": { "type": "string", "default": "Ready to subscribe?" },
+    "description": {
+      "type": "string",
+      "default": "Get pricing, demos, and access to proprietary models — or start with ChipBook, our monthly industry tracker."
+    },
+    "primaryLabel": { "type": "string", "default": "Contact Sales" },
+    "primaryUrl": { "type": "string", "default": "mailto:sales@semianalysis.com" },
+    "secondaryLabel": { "type": "string", "default": "Buy ChipBook" },
+    "secondaryUrl": { "type": "string", "default": "mailto:ChipBookSales@SemiAnalysis.com" },
+    "tertiaryLabel": { "type": "string", "default": "Browse Models" },
+    "tertiaryUrl": { "type": "string", "default": "/models/" }
+  },
+  "render": "file:./render.php"
+}

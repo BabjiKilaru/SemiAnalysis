@@ -1,0 +1,11 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "sa/ticker",
+  "title": "SA Industry Ticker",
+  "category": "semianalysis",
+  "icon": "controls-forward",
+  "description": "Scrolling industry terms marquee.",
+  "supports": { "html": false },
+  "render": "file:./render.php"
+}

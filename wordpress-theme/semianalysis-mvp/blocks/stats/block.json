@@ -1,0 +1,11 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "sa/stats",
+  "title": "SA Stats Row",
+  "category": "semianalysis",
+  "icon": "chart-bar",
+  "description": "Animated stats row for hero sections.",
+  "supports": { "html": false },
+  "render": "file:./render.php"
+}

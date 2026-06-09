@@ -1,0 +1,172 @@
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap");
+@import "tailwindcss";
+
+:root {
+  --sa-amber: #f7b041;
+  --sa-cobalt: #0b86d1;
+  --sa-mint: #2ead8e;
+  --sa-coral: #e06347;
+  --sa-slate: #3d3d3d;
+  --sa-metal: #969696;
+  --sa-bg: #0a0a0a;
+  --sa-bg-elevated: #141414;
+  --sa-bg-card: #1a1a1a;
+  --sa-border: #2a2a2a;
+  --sa-text: #f5f5f5;
+  --sa-text-muted: #a3a3a3;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Outfit", system-ui, sans-serif;
+  background: var(--sa-bg);
+  color: var(--sa-text);
+  -webkit-font-smoothing: antialiased;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+html,
+body {
+  min-height: 100%;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--sa-amber) 30%, transparent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Shimmer for featured badges */
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+.sa-shimmer {
+  background: linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--sa-amber) 10%, transparent) 0%,
+    color-mix(in srgb, var(--sa-amber) 25%, transparent) 50%,
+    color-mix(in srgb, var(--sa-amber) 10%, transparent) 100%
+  );
+  background-size: 200% auto;
+  animation: shimmer 3s linear infinite;
+}
+
+/* Animated gradient border */
+@keyframes border-rotate {
+  0% { --angle: 0deg; }
+  100% { --angle: 360deg; }
+}
+
+@property --angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+.sa-glow-border {
+  position: relative;
+  border-radius: 1rem;
+  overflow: hidden;
+}
+
+.sa-glow-border::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  padding: 1px;
+  border-radius: inherit;
+  background: conic-gradient(
+    from var(--angle),
+    transparent 40%,
+    var(--sa-amber) 50%,
+    var(--sa-cobalt) 60%,
+    transparent 70%
+  );
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  animation: border-rotate 6s linear infinite;
+  pointer-events: none;
+}
+
+/* Card hover glow */
+.sa-card-glow {
+  transition: transform 0.35s cubic-bezier(0.21, 0.47, 0.32, 0.98),
+    box-shadow 0.35s ease,
+    border-color 0.35s ease;
+}
+
+.sa-card-glow:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px -12px color-mix(in srgb, var(--sa-amber) 15%, transparent),
+    0 0 0 1px color-mix(in srgb, var(--sa-amber) 20%, transparent);
+}
+
+/* Button magnetic feel */
+.sa-btn-lift {
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.sa-btn-lift:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px -4px color-mix(in srgb, var(--sa-amber) 35%, transparent);
+}
+
+.sa-btn-lift:active {
+  transform: translateY(0);
+}
+
+body.sa-sticky-bar-visible {
+  padding-bottom: 4.25rem;
+}
+
+@media (min-width: 640px) {
+  body.sa-sticky-bar-visible {
+    padding-bottom: 4.5rem;
+  }
+}
+
+/* Text gradient */
+.sa-text-gradient {
+  background: linear-gradient(135deg, var(--sa-amber) 0%, #ffd080 50%, var(--sa-cobalt) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Accent line grow */
+@keyframes line-grow {
+  from { width: 0; }
+  to { width: 2rem; }
+}
+
+.sa-accent-line {
+  animation: line-grow 0.8s cubic-bezier(0.21, 0.47, 0.32, 0.98) forwards;
+}
+
+/* Pulse dot */
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.4); }
+}
+
+.sa-pulse-dot {
+  animation: pulse-dot 2s ease-in-out infinite;
+}

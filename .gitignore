@@ -1,0 +1,17 @@
+# Dependencies & build output
+node_modules/
+.next/
+out/
+
+# Environment & secrets
+.env*.local
+
+# OS & logs
+.DS_Store
+*.log
+
+# TypeScript
+*.tsbuildinfo
+
+# LocalWP database dumps
+*.sql

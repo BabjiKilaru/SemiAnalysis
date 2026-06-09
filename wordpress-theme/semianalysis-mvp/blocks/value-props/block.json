@@ -1,0 +1,15 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "sa/value-props",
+  "title": "SA Value Props",
+  "category": "semianalysis",
+  "icon": "star-filled",
+  "description": "Why SemiAnalysis three-column value section.",
+  "supports": { "html": false },
+  "attributes": {
+    "eyebrow": { "type": "string", "default": "Why SemiAnalysis" },
+    "title": { "type": "string", "default": "Research-grade, not marketing-grade" }
+  },
+  "render": "file:./render.php"
+}

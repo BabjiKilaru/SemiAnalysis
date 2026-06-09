@@ -1,0 +1,48 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "sa/article-cards",
+  "title": "SA Article Cards",
+  "category": "semianalysis",
+  "icon": "admin-post",
+  "description": "Substack article cards linking externally.",
+  "supports": { "html": false },
+  "attributes": {
+    "eyebrow": { "type": "string", "default": "Free Research" },
+    "title": { "type": "string", "default": "Latest from the newsletter" },
+    "description": {
+      "type": "string",
+      "default": "High-quality analysis on Substack — your entry point into SemiAnalysis research."
+    },
+    "articles": {
+      "type": "array",
+      "default": [
+        {
+          "title": "Deep Dive: AI Accelerator Supply Chain",
+          "excerpt": "Analysis of production capacity, lead times, and vendor dynamics.",
+          "date": "May 2026",
+          "url": "https://www.semianalysis.com"
+        },
+        {
+          "title": "Datacenter Power: The Next Bottleneck",
+          "excerpt": "How critical IT power capacity constraints are reshaping AI infrastructure.",
+          "date": "Apr 2026",
+          "url": "https://www.semianalysis.com"
+        },
+        {
+          "title": "GPU Cloud Benchmarks: ClusterMAX Update",
+          "excerpt": "Latest benchmark results across leading neocloud providers.",
+          "date": "Apr 2026",
+          "url": "https://www.semianalysis.com"
+        },
+        {
+          "title": "CoWoS and Advanced Packaging Trends",
+          "excerpt": "Tracking supplier revenue indices and capacity expansion.",
+          "date": "Mar 2026",
+          "url": "https://www.semianalysis.com"
+        }
+      ]
+    }
+  },
+  "render": "file:./render.php"
+}

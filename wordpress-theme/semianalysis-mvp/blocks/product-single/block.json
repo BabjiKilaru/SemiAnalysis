@@ -1,0 +1,11 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "sa/product-single",
+  "title": "SA Product Single",
+  "category": "semianalysis",
+  "icon": "products",
+  "description": "Full product landing page layout for sa_product posts.",
+  "supports": { "html": false },
+  "render": "file:./render.php"
+}

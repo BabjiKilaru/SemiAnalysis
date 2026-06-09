@@ -1,0 +1,24 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "sa/hero",
+  "title": "SA Hero",
+  "category": "semianalysis",
+  "icon": "cover-image",
+  "description": "Homepage hero section with CTAs.",
+  "supports": { "html": false },
+  "attributes": {
+    "eyebrow": { "type": "string", "default": "Independent Research" },
+    "title": { "type": "string", "default": "Bridging semiconductors and business" },
+    "accentWord": { "type": "string", "default": " and business" },
+    "description": {
+      "type": "string",
+      "default": "Institutional-grade models and research for investors, AI infrastructure teams, enterprise buyers, and researchers."
+    },
+    "primaryLabel": { "type": "string", "default": "Explore Industry Models" },
+    "primaryUrl": { "type": "string", "default": "/models/" },
+    "secondaryLabel": { "type": "string", "default": "View ChipBook" },
+    "secondaryUrl": { "type": "string", "default": "/products/chipbook/" }
+  },
+  "render": "file:./render.php"
+}

@@ -1,0 +1,17 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "sa/funnel-path",
+  "title": "SA Funnel Path",
+  "category": "semianalysis",
+  "icon": "randomize",
+  "description": "Three-step sales funnel: Discover, Explore, Convert.",
+  "supports": { "html": false },
+  "attributes": {
+    "title": {
+      "type": "string",
+      "default": "From free research to institutional access"
+    }
+  },
+  "render": "file:./render.php"
+}
