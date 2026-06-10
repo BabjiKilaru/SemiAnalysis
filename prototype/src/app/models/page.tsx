@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { ModelsPageClient } from "@/components/pages";
 import { industryModelsCatalog } from "@/lib/content";
 
@@ -8,5 +9,9 @@ export const metadata = {
 };
 
 export default function ModelsPage() {
-  return <ModelsPageClient models={industryModelsCatalog} />;
+  return (
+    <Suspense fallback={null}>
+      <ModelsPageClient models={industryModelsCatalog} />
+    </Suspense>
+  );
 }

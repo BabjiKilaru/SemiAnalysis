@@ -14,7 +14,7 @@
       "default": "Get pricing, demos, and access to proprietary models — or start with ChipBook, our monthly industry tracker."
     },
     "primaryLabel": { "type": "string", "default": "Contact Sales" },
-    "primaryUrl": { "type": "string", "default": "mailto:sales@semianalysis.com" },
+    "primaryUrl": { "type": "string", "default": "#" },
     "secondaryLabel": { "type": "string", "default": "Buy ChipBook" },
     "secondaryUrl": { "type": "string", "default": "mailto:ChipBookSales@SemiAnalysis.com" },
     "tertiaryLabel": { "type": "string", "default": "Browse Models" },

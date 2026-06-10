@@ -286,7 +286,7 @@ function AboutHero() {
 
           <FadeUp delay={0.24}>
             <div className="mt-4 flex flex-wrap items-center justify-center gap-2 sm:gap-3">
-              <Button href={`mailto:${SITE.salesEmail}`}>Contact Sales</Button>
+              <Button href={SITE.contactSalesUrl}>Contact Sales</Button>
               <Button href={SITE.careersUrl} variant="secondary" external>
                 Careers
               </Button>

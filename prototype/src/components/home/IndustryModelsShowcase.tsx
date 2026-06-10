@@ -184,7 +184,7 @@ function ModelCoverCard({
         )}
         {isActive && (
           <p className="mt-auto pt-3 text-xs font-semibold text-[var(--sa-amber)]">
-            {product.external ? "Learn more on SemiAnalysis →" : "View model →"}
+            View model →
           </p>
         )}
       </div>
@@ -213,23 +213,12 @@ function ModelCoverCard({
       onClick={isActive ? undefined : onSelect}
     >
       {isActive ? (
-        product.external || product.href.startsWith("http") ? (
-          <a
-            href={product.href}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="sa-card-glow relative block h-full overflow-hidden rounded-xl border border-white/15 bg-[var(--sa-bg-card)] shadow-[0_24px_60px_-20px_rgba(0,0,0,0.8)]"
-          >
-            {inner}
-          </a>
-        ) : (
-          <Link
-            href={product.href}
-            className="sa-card-glow relative block h-full overflow-hidden rounded-xl border border-white/15 bg-[var(--sa-bg-card)] shadow-[0_24px_60px_-20px_rgba(0,0,0,0.8)]"
-          >
-            {inner}
-          </Link>
-        )
+        <Link
+          href={product.href}
+          className="sa-card-glow relative block h-full overflow-hidden rounded-xl border border-white/15 bg-[var(--sa-bg-card)] shadow-[0_24px_60px_-20px_rgba(0,0,0,0.8)]"
+        >
+          {inner}
+        </Link>
       ) : (
         <div className="relative h-full overflow-hidden rounded-xl border border-white/10 bg-[var(--sa-bg-card)] shadow-[0_16px_40px_-20px_rgba(0,0,0,0.7)]">
           {inner}
@@ -285,7 +274,7 @@ export function IndustryModelsShowcase({ models }: { models: Product[] }) {
           </p>
           <div className="mt-6 hidden flex-col gap-2 lg:flex">
             <Button href="/models">Explore All Models</Button>
-            <Button href={`mailto:${SITE.salesEmail}`} variant="secondary">
+            <Button href={SITE.contactSalesUrl} variant="secondary">
               Contact Sales
             </Button>
           </div>

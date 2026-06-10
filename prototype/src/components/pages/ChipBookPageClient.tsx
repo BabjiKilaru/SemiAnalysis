@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import {
   FadeUp,
   StaggerGrid,
@@ -19,90 +19,176 @@ const heroStats = [
   { label: "Calls", value: "Included", accent: "var(--sa-coral)" },
 ];
 
+const loadEase = [0.22, 1, 0.36, 1] as const;
+
 function ChipBookPageBackground() {
   const reduceMotion = useReducedMotion();
-  const ease = [0.21, 0.47, 0.32, 0.98] as const;
+  const { scrollY } = useScroll();
+  const layerOpacity = useTransform(scrollY, [0, 320, 720], [1, 0.45, 0.06]);
+  const watermarkOpacity = useTransform(scrollY, [0, 240, 520], [1, 0.3, 0]);
 
   return (
-    <div className="pointer-events-none fixed inset-0 z-0" aria-hidden="true">
+    <motion.div
+      className="pointer-events-none fixed inset-0 z-0"
+      aria-hidden="true"
+      initial={reduceMotion ? false : { opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: reduceMotion ? 0.01 : 1.4, ease: loadEase }}
+    >
+      <motion.div className="absolute inset-0 overflow-hidden" style={{ opacity: layerOpacity }}>
       <motion.div
-        className="absolute inset-0 opacity-[0.35]"
+        className="absolute inset-0 bg-gradient-to-b from-[var(--sa-bg)]/10 via-[var(--sa-bg)]/28 to-[var(--sa-bg)]/65"
         initial={reduceMotion ? false : { opacity: 0 }}
-        animate={{ opacity: 0.35 }}
-        transition={{ duration: 1.2, ease }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1.6, ease: loadEase }}
+      />
+
+      <motion.div
+        className="absolute inset-0"
+        initial={reduceMotion ? false : { opacity: 0 }}
+        animate={{ opacity: 0.7 }}
+        transition={{ duration: 2, ease: loadEase, delay: reduceMotion ? 0 : 0.15 }}
         style={{
-          backgroundImage: `
-            linear-gradient(to right, rgba(247,176,65,0.06) 1px, transparent 1px),
-            linear-gradient(to bottom, rgba(247,176,65,0.06) 1px, transparent 1px)
-          `,
-          backgroundSize: "20px 20px",
+          backgroundImage:
+            "linear-gradient(135deg, color-mix(in srgb, var(--sa-amber) 9%, transparent) 0%, transparent 42%, color-mix(in srgb, var(--sa-cobalt) 7%, transparent) 100%)",
         }}
       />
+
+      <motion.div
+        className="absolute inset-0"
+        initial={reduceMotion ? false : { opacity: 0 }}
+        animate={{ opacity: 0.28 }}
+        transition={{ duration: 2, ease: loadEase, delay: reduceMotion ? 0 : 0.25 }}
+        style={{
+          backgroundImage: `radial-gradient(circle at 1px 1px, rgba(247,176,65,0.16) 1px, transparent 0)`,
+          backgroundSize: "28px 28px",
+          maskImage:
+            "radial-gradient(ellipse 75% 60% at 50% 32%, black 20%, transparent 72%)",
+        }}
+      />
+
+      <motion.div
+        className="absolute inset-0"
+        initial={reduceMotion ? false : { opacity: 0 }}
+        animate={{ opacity: 0.16 }}
+        transition={{ duration: 2, ease: loadEase, delay: reduceMotion ? 0 : 0.35 }}
+        style={{
+          backgroundImage: `
+            linear-gradient(to right, rgba(247,176,65,0.07) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(247,176,65,0.07) 1px, transparent 1px)
+          `,
+          backgroundSize: "20px 20px",
+          maskImage:
+            "radial-gradient(ellipse 80% 65% at 50% 35%, black 15%, transparent 75%)",
+        }}
+      />
+
+      {!reduceMotion && (
+        <>
+          <motion.div
+            className="absolute -left-28 top-[14%] h-80 w-80"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 2.4, ease: loadEase, delay: 0.4 }}
+          >
+            <motion.div
+              className="h-full w-full rounded-full bg-[var(--sa-amber)]/14 blur-[100px]"
+              animate={{ x: [0, 36, 0], y: [0, 24, 0], scale: [1, 1.08, 1] }}
+              transition={{ duration: 14, repeat: Infinity, ease: "easeInOut", delay: 2.4 }}
+            />
+          </motion.div>
+          <motion.div
+            className="absolute -right-24 top-[22%] h-72 w-72"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 2.4, ease: loadEase, delay: 0.55 }}
+          >
+            <motion.div
+              className="h-full w-full rounded-full bg-[var(--sa-cobalt)]/12 blur-[90px]"
+              animate={{ x: [0, -28, 0], y: [0, -18, 0], scale: [1, 1.1, 1] }}
+              transition={{ duration: 16, repeat: Infinity, ease: "easeInOut", delay: 2.8 }}
+            />
+          </motion.div>
+          <motion.div
+            className="absolute bottom-[38%] left-1/2 h-56 w-[520px] -translate-x-1/2"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 2.4, ease: loadEase, delay: 0.7 }}
+          >
+            <motion.div
+              className="h-full w-full rounded-full bg-[var(--sa-mint)]/8 blur-[80px]"
+              animate={{ opacity: [0.35, 0.6, 0.35] }}
+              transition={{ duration: 9, repeat: Infinity, ease: "easeInOut", delay: 3 }}
+            />
+          </motion.div>
+        </>
+      )}
+
       <motion.div
         className="absolute left-1/2 top-[34%] -translate-x-1/2 -translate-y-1/2 select-none px-4"
+        style={{ opacity: watermarkOpacity }}
       >
         <motion.div
-          className="pointer-events-none absolute left-1/2 top-1/2 h-[420px] w-[min(92vw,720px)] -translate-x-1/2 -translate-y-1/2 rounded-full blur-[90px]"
+          className="pointer-events-none absolute left-1/2 top-1/2 h-[440px] w-[min(94vw,760px)] -translate-x-1/2 -translate-y-1/2 rounded-full blur-[95px]"
           style={{
             background:
-              "radial-gradient(ellipse at center, color-mix(in srgb, var(--sa-amber) 40%, transparent) 0%, color-mix(in srgb, var(--sa-cobalt) 22%, transparent) 50%, transparent 72%)",
+              "radial-gradient(ellipse at center, color-mix(in srgb, var(--sa-amber) 50%, transparent) 0%, color-mix(in srgb, var(--sa-cobalt) 32%, transparent) 48%, transparent 74%)",
           }}
-          initial={reduceMotion ? false : { opacity: 0, scale: 0.88 }}
-          animate={
-            reduceMotion
-              ? { opacity: 0.32, scale: 1 }
-              : { opacity: [0, 0.55, 0.32], scale: [0.88, 1.1, 1] }
-          }
+          initial={reduceMotion ? false : { opacity: 0, scale: 0.97 }}
+          animate={{ opacity: 0.45, scale: 1 }}
           transition={
             reduceMotion
               ? { duration: 0.01 }
-              : { duration: 2.8, ease, times: [0, 0.6, 1] }
+              : { duration: 2.8, ease: loadEase, delay: 0.2 }
           }
         />
         {!reduceMotion && (
           <motion.div
-            className="pointer-events-none absolute left-1/2 top-1/2 h-[420px] w-[min(92vw,720px)] -translate-x-1/2 -translate-y-1/2 rounded-full blur-[90px]"
-            style={{
-              background:
-                "radial-gradient(ellipse at center, color-mix(in srgb, var(--sa-amber) 40%, transparent) 0%, color-mix(in srgb, var(--sa-cobalt) 22%, transparent) 50%, transparent 72%)",
-            }}
-            animate={{ opacity: [0.24, 0.4, 0.24], scale: [1, 1.05, 1] }}
-            transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 2.8 }}
+            className="pointer-events-none absolute left-[58%] top-[42%] h-48 w-48 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[var(--sa-cobalt)]/18 blur-[70px]"
+            initial={{ opacity: 0, scale: 0.96 }}
+            animate={{ opacity: 0.28, scale: 1 }}
+            transition={{ duration: 2.6, ease: loadEase, delay: 0.9 }}
           />
         )}
+
         <div className="relative text-center">
           <motion.span
-            className="block text-[clamp(2rem,5.5vw,3.75rem)] font-semibold uppercase tracking-[0.3em] text-[var(--sa-cobalt)]/25"
-            style={{ WebkitTextStroke: "1px color-mix(in srgb, var(--sa-cobalt) 55%, transparent)" }}
-            initial={reduceMotion ? false : { opacity: 0, y: 24, filter: "blur(8px)" }}
+            className="block text-[clamp(2rem,5vw,3.5rem)] font-semibold uppercase tracking-[0.28em] text-[var(--sa-cobalt)]/38"
+            initial={reduceMotion ? false : { opacity: 0, y: 10, filter: "blur(10px)" }}
             animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-            transition={{ duration: 0.9, delay: reduceMotion ? 0 : 0.15, ease }}
+            transition={{ duration: 1.4, delay: reduceMotion ? 0 : 0.45, ease: loadEase }}
           >
             SemiAnalysis
           </motion.span>
           <motion.span
-            className="-mt-2 block text-[clamp(5.5rem,20vw,14rem)] font-bold leading-[0.9] tracking-[-0.04em] text-[var(--sa-metal)]/20 md:-mt-3"
-            style={{ WebkitTextStroke: "1px color-mix(in srgb, var(--sa-amber) 45%, transparent)" }}
-            initial={reduceMotion ? false : { opacity: 0, y: 36, scale: 0.94, filter: "blur(10px)" }}
-            animate={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
-            transition={{ duration: 1, delay: reduceMotion ? 0 : 0.45, ease }}
+            className="-mt-2 block bg-gradient-to-br from-[var(--sa-amber)] via-[#ffd080] to-[var(--sa-cobalt)] bg-clip-text text-[clamp(5rem,18vw,12.5rem)] font-bold leading-[0.9] tracking-[-0.04em] text-transparent md:-mt-3"
+            initial={reduceMotion ? false : { opacity: 0, y: 14, filter: "blur(12px)" }}
+            animate={{ opacity: 0.4, y: 0, filter: "blur(0px)" }}
+            transition={{ duration: 1.6, delay: reduceMotion ? 0 : 0.65, ease: loadEase }}
           >
             ChipBook
           </motion.span>
         </div>
       </motion.div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 }
 
 function ChipBookHero() {
+  const reduceMotion = useReducedMotion();
+
   return (
     <section className="relative w-full border-b border-[var(--sa-border)]">
       <Container className="relative flex min-h-[calc(100dvh-4rem)] flex-col justify-end pb-5 pt-16 md:pb-6 md:pt-20">
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.65, ease: [0.21, 0.47, 0.32, 0.98] }}
+          initial={reduceMotion ? false : { opacity: 0, y: 20, filter: "blur(10px)" }}
+          animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+          transition={{
+            duration: reduceMotion ? 0.01 : 1.3,
+            delay: reduceMotion ? 0 : 0.85,
+            ease: loadEase,
+          }}
           className="sa-glow-border relative shrink-0 overflow-hidden rounded-2xl border border-[var(--sa-border)] bg-[var(--sa-bg-elevated)]/80 backdrop-blur-md"
         >
           <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[var(--sa-amber)]/50 to-transparent" />

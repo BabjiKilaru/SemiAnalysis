@@ -31,7 +31,9 @@ export function Button({
   const classes = `${base} ${variants[variant]} ${className}`;
   const isInternal = href.startsWith("/");
   const isMailto = href.startsWith("mailto:");
-  const openInNewTab = !isInternal && !isMailto && external !== false;
+  const isHashLink = href === "#";
+  const openInNewTab =
+    !isInternal && !isMailto && !isHashLink && external !== false;
 
   const inner = (
     <motion.span whileTap={{ scale: 0.97 }} className="inline-flex items-center">

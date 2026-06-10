@@ -1,7 +1,7 @@
 "use client";
 
-import Link from "next/link";
-import { useMemo, useState, type ReactNode } from "react";
+import { useCallback, useMemo, useState, type ReactNode } from "react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import {
   AnimatedStat,
@@ -13,7 +13,9 @@ import {
 import { Container } from "@/components/shared";
 import { HeroBackground, IndustryTicker } from "@/components/shared";
 import { ConversionBand } from "@/components/marketing";
+import { ModelDetailOverlay } from "@/components/models";
 import type { IndustryModelEntry } from "@/lib/content";
+import { getModelBySlug } from "@/lib/models";
 import { SITE } from "@/lib/site";
 
 type Category = IndustryModelEntry["category"] | "all";
@@ -63,34 +65,25 @@ const STACK_LAYERS = [
   { label: "Economics & tokens", color: "var(--sa-coral)" },
 ];
 
-function ModelLink({
+function ModelCardButton({
   model,
   children,
   className = "",
+  onOpen,
 }: {
   model: IndustryModelEntry;
   children: ReactNode;
   className?: string;
+  onOpen: (slug: string) => void;
 }) {
-  const isExternal = model.external || model.href.startsWith("http");
-
-  if (isExternal) {
-    return (
-      <a
-        href={model.href}
-        target="_blank"
-        rel="noopener noreferrer"
-        className={className}
-      >
-        {children}
-      </a>
-    );
-  }
-
   return (
-    <Link href={model.href} className={className}>
+    <button
+      type="button"
+      onClick={() => onOpen(model.slug)}
+      className={`w-full cursor-pointer text-left ${className}`}
+    >
       {children}
-    </Link>
+    </button>
   );
 }
 
@@ -109,14 +102,21 @@ function CategoryIcon({ category }: { category: IndustryModelEntry["category"] }
   );
 }
 
-function FeaturedSpotlight({ model }: { model: IndustryModelEntry }) {
+function FeaturedSpotlight({
+  model,
+  onOpen,
+}: {
+  model: IndustryModelEntry;
+  onOpen: (slug: string) => void;
+}) {
   const meta = CATEGORY_META[model.category];
   const isChipBook = model.name === "ChipBook";
 
   return (
     <StaggerItem>
-      <ModelLink
+      <ModelCardButton
         model={model}
+        onOpen={onOpen}
         className={`sa-card-glow group relative flex h-full flex-col overflow-hidden rounded-xl border p-5 ${
           isChipBook
             ? "sa-glow-border border-[var(--sa-amber)]/30 bg-[var(--sa-bg-card)]"
@@ -131,34 +131,38 @@ function FeaturedSpotlight({ model }: { model: IndustryModelEntry }) {
 
         <div className="relative flex flex-1 flex-col">
           <div className="flex items-start justify-between gap-3">
-            <div
-              className="flex h-10 w-10 items-center justify-center rounded-lg border border-white/10 bg-black/25 p-2 backdrop-blur-sm"
-              style={{ color: meta.accent }}
-            >
-              <CategoryIcon category={model.category} />
+            <div className="flex min-w-0 flex-1 items-start gap-3">
+              <div
+                className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-white/10 bg-black/25 p-2 backdrop-blur-sm"
+                style={{ color: meta.accent }}
+              >
+                <CategoryIcon category={model.category} />
+              </div>
+              <div className="min-w-0">
+                <h3 className="text-lg font-bold leading-snug tracking-tight transition-colors group-hover:text-[var(--sa-amber)]">
+                  {model.name}
+                </h3>
+                <p className="mt-0.5 text-xs font-medium" style={{ color: meta.accent }}>
+                  {model.tagline}
+                </p>
+              </div>
             </div>
             {isChipBook && (
-              <span className="sa-shimmer rounded-full px-2.5 py-0.5 text-[10px] font-medium text-[var(--sa-amber)]">
+              <span className="sa-shimmer shrink-0 rounded-full px-2.5 py-0.5 text-[10px] font-medium text-[var(--sa-amber)]">
                 Flagship
               </span>
             )}
           </div>
 
-          <h3 className="mt-3 text-lg font-bold tracking-tight transition-colors group-hover:text-[var(--sa-amber)]">
-            {model.name}
-          </h3>
-          <p className="mt-1 text-xs font-medium" style={{ color: meta.accent }}>
-            {model.tagline}
-          </p>
-          <p className="mt-2 line-clamp-2 flex-1 text-sm leading-relaxed text-[var(--sa-text-muted)]">
+          <p className="mt-3 line-clamp-2 flex-1 text-sm leading-relaxed text-[var(--sa-text-muted)]">
             {model.description}
           </p>
           <span className="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-[var(--sa-amber)] transition-all group-hover:gap-2">
-            {model.external ? "Explore on SemiAnalysis" : "View product page"}
+            Learn more
             <span aria-hidden="true">→</span>
           </span>
         </div>
-      </ModelLink>
+      </ModelCardButton>
     </StaggerItem>
   );
 }
@@ -166,9 +170,11 @@ function FeaturedSpotlight({ model }: { model: IndustryModelEntry }) {
 function ModelCard({
   model,
   index,
+  onOpen,
 }: {
   model: IndustryModelEntry;
   index: number;
+  onOpen: (slug: string) => void;
 }) {
   const meta = CATEGORY_META[model.category];
   const num = String(index + 1).padStart(2, "0");
@@ -181,8 +187,9 @@ function ModelCard({
       exit={{ opacity: 0, scale: 0.96 }}
       transition={{ duration: 0.35 }}
     >
-      <ModelLink
+      <ModelCardButton
         model={model}
+        onOpen={onOpen}
         className="sa-card-glow group relative flex h-full flex-col overflow-hidden rounded-xl border border-[var(--sa-border)] bg-[var(--sa-bg-elevated)] p-4"
       >
         <div
@@ -205,17 +212,21 @@ function ModelCard({
             </span>
           </div>
 
-          <div
-            className="mt-2 flex h-8 w-8 items-center justify-center rounded-lg border border-white/10 bg-black/20 p-1.5"
-            style={{ color: meta.accent }}
-          >
-            <CategoryIcon category={model.category} />
+          <div className="flex gap-3">
+            <div
+              className="mt-2 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-white/10 bg-black/20 p-1.5"
+              style={{ color: meta.accent }}
+            >
+              <CategoryIcon category={model.category} />
+            </div>
+            <div className="min-w-0 flex-1">
+              <h3 className="mt-2 text-base font-semibold leading-snug transition-colors group-hover:text-[var(--sa-amber)]">
+                {model.name}
+              </h3>
+              <p className="mt-0.5 text-xs font-medium text-[var(--sa-cobalt)]">{model.tagline}</p>
+            </div>
           </div>
 
-          <h3 className="mt-2 text-base font-semibold leading-snug transition-colors group-hover:text-[var(--sa-amber)]">
-            {model.name}
-          </h3>
-          <p className="mt-0.5 text-xs font-medium text-[var(--sa-cobalt)]">{model.tagline}</p>
           <p className="mt-2 line-clamp-3 flex-1 text-sm leading-relaxed text-[var(--sa-text-muted)]">
             {model.description}
           </p>
@@ -225,13 +236,35 @@ function ModelCard({
             <span aria-hidden="true">→</span>
           </span>
         </div>
-      </ModelLink>
+      </ModelCardButton>
     </motion.div>
   );
 }
 
 export function ModelsPageClient({ models }: { models: IndustryModelEntry[] }) {
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
   const [activeFilter, setActiveFilter] = useState<Category>("all");
+
+  const selectedSlug = searchParams.get("model");
+  const selectedModel = selectedSlug ? getModelBySlug(selectedSlug) ?? null : null;
+
+  const openModel = useCallback(
+    (slug: string) => {
+      const params = new URLSearchParams(searchParams.toString());
+      params.set("model", slug);
+      router.push(`${pathname}?${params.toString()}`, { scroll: false });
+    },
+    [pathname, router, searchParams],
+  );
+
+  const closeModel = useCallback(() => {
+    const params = new URLSearchParams(searchParams.toString());
+    params.delete("model");
+    const query = params.toString();
+    router.push(query ? `${pathname}?${query}` : pathname, { scroll: false });
+  }, [pathname, router, searchParams]);
 
   const featured = useMemo(() => models.filter((m) => m.featured), [models]);
   const catalog = useMemo(() => models.filter((m) => !m.featured), [models]);
@@ -316,7 +349,7 @@ export function ModelsPageClient({ models }: { models: IndustryModelEntry[] }) {
           </FadeUp>
           <StaggerGrid className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3" stagger={0.08}>
             {featured.map((model) => (
-              <FeaturedSpotlight key={model.name} model={model} />
+              <FeaturedSpotlight key={model.slug} model={model} onOpen={openModel} />
             ))}
           </StaggerGrid>
 
@@ -362,7 +395,7 @@ export function ModelsPageClient({ models }: { models: IndustryModelEntry[] }) {
             <motion.div layout className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
               <AnimatePresence mode="popLayout">
                 {filtered.map((model, index) => (
-                  <ModelCard key={model.name} model={model} index={index} />
+                  <ModelCard key={model.slug} model={model} index={index} onOpen={openModel} />
                 ))}
               </AnimatePresence>
             </motion.div>
@@ -371,6 +404,8 @@ export function ModelsPageClient({ models }: { models: IndustryModelEntry[] }) {
       </section>
 
       <ConversionBand />
+
+      <ModelDetailOverlay model={selectedModel} onClose={closeModel} />
     </>
   );
 }

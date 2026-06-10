@@ -4,7 +4,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { FadeUp, StaggerGrid, StaggerItem } from "@/components/shared";
 import { Button } from "@/components/ui";
-import { officialModelUrls } from "@/lib/content";
+import { getModelHref } from "@/lib/models";
 import { SITE } from "@/lib/site";
 
 const supplyChain = [
@@ -53,11 +53,11 @@ const pillars = [
 ];
 
 const modelLinks = [
-  { name: "Accelerator", href: officialModelUrls["accelerator-model"] },
-  { name: "AI Cloud TCO", href: officialModelUrls["tco-model"] },
-  { name: "Datacenter", href: officialModelUrls["datacenter-model"] },
-  { name: "Wafer Fab", href: officialModelUrls["wafer-fab-model"] },
-  { name: "AI Networking", href: officialModelUrls["ai-networking-model"] },
+  { name: "Accelerator", href: getModelHref("accelerator-model") },
+  { name: "AI Cloud TCO", href: getModelHref("tco-model") },
+  { name: "Datacenter", href: getModelHref("datacenter-model") },
+  { name: "Wafer Fab", href: getModelHref("wafer-fab-model") },
+  { name: "AI Networking", href: getModelHref("ai-networking-model") },
 ];
 
 const audiences = [

@@ -28,7 +28,7 @@ const steps = [
     step: "03",
     title: "Convert",
     body: "Contact sales for model subscriptions, demos, and institutional pricing.",
-    cta: { label: "Contact Sales", href: `mailto:${SITE.salesEmail}` },
+    cta: { label: "Contact Sales", href: SITE.contactSalesUrl },
     secondary: { label: "Buy ChipBook", href: SITE.loginUrl },
     accent: "var(--sa-mint)",
   },
@@ -70,12 +70,12 @@ export function FunnelPath() {
                   {item.body}
                 </p>
                 <div className="mt-4 flex flex-wrap gap-2">
-                  {item.cta.external ? (
-                    <Button href={item.cta.href} external className="!px-4 !py-2 !text-xs">
-                      {item.cta.label}
-                    </Button>
-                  ) : item.cta.href.startsWith("mailto:") ? (
-                    <Button href={item.cta.href} className="!px-4 !py-2 !text-xs">
+                  {item.cta.external || !item.cta.href.startsWith("/") ? (
+                    <Button
+                      href={item.cta.href}
+                      external={item.cta.external}
+                      className="!px-4 !py-2 !text-xs"
+                    >
                       {item.cta.label}
                     </Button>
                   ) : (
@@ -87,19 +87,11 @@ export function FunnelPath() {
                     </Link>
                   )}
                   {item.secondary &&
-                    (item.secondary.href.startsWith("mailto:") ? (
+                    (!item.secondary.href.startsWith("/") ? (
                       <Button
                         href={item.secondary.href}
                         variant="secondary"
-                        className="!px-4 !py-2 !text-xs"
-                      >
-                        {item.secondary.label}
-                      </Button>
-                    ) : item.secondary.href.startsWith("http") ? (
-                      <Button
-                        href={item.secondary.href}
-                        variant="secondary"
-                        external={false}
+                        external={item.secondary.href.startsWith("http")}
                         className="!px-4 !py-2 !text-xs"
                       >
                         {item.secondary.label}
@@ -147,7 +139,7 @@ export function ConversionBand() {
                 </p>
               </div>
               <div className="flex flex-col gap-3 sm:flex-row md:flex-col lg:flex-row">
-                <Button href={`mailto:${SITE.salesEmail}`}>Contact Sales</Button>
+                <Button href={SITE.contactSalesUrl}>Contact Sales</Button>
                 <Button href={SITE.loginUrl} variant="secondary" external={false}>
                   Buy ChipBook
                 </Button>

@@ -11,6 +11,8 @@ export const SITE = {
   eventsUrl: "https://semianalysis.com/semianalysis-events/",
   careersUrl: "https://semianalysis.com/semianalysis-careers/",
   salesEmail: "sales@semianalysis.com",
+  /** Placeholder until on-site contact form URL is wired. */
+  contactSalesUrl: "#",
   chipbookSalesEmail: "ChipBookSales@SemiAnalysis.com",
   substackFeedUrl: "https://newsletter.semianalysis.com/feed",
 } as const;
@@ -22,6 +24,7 @@ export type NavLink = {
 };
 
 export const navLinks: NavLink[] = [
+  { href: "/", label: "Home" },
   { href: "/models", label: "Industry Models" },
   { href: "/products/chipbook", label: "ChipBook" },
   { href: SITE.newsletterArchiveUrl, label: "Archives", external: true },

@@ -39,7 +39,7 @@ $steps = array(
 		'body'    => 'Contact sales for model subscriptions, demos, and institutional pricing.',
 		'primary' => array(
 			'label' => 'Contact Sales',
-			'url'   => 'mailto:sales@semianalysis.com',
+			'url'   => '#',
 			'class' => 'sa-btn--primary',
 		),
 		'secondary' => array(

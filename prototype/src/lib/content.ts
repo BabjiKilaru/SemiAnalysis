@@ -1,25 +1,17 @@
+import { getModelHref } from "./models";
+
 export type Product = {
   slug: string;
   name: string;
   tagline: string;
   description: string;
   href: string;
-  external?: boolean;
   featured?: boolean;
   audience?: { investors: string; executives: string };
   includes?: string[];
   ctaLabel?: string;
   ctaEmail?: string;
 };
-
-/** Official SemiAnalysis URLs for industry models (homepage carousel + chips). */
-export const officialModelUrls = {
-  "accelerator-model": "https://semianalysis.com/accelerator-hbm-model/",
-  "tco-model": "https://semianalysis.com/ai-cloud-tco-model/",
-  "datacenter-model": "https://semianalysis.com/datacenter-industry-model/",
-  "wafer-fab-model": "https://semianalysis.com/wafer-fab-model/",
-  "ai-networking-model": "https://semianalysis.com/ai-networking-model/",
-} as const;
 
 export const products: Product[] = [
   {
@@ -52,8 +44,7 @@ export const products: Product[] = [
     tagline: "Historical and forecast accelerator production",
     description:
       "Gauge historical and future accelerator production by company and type across the AI hardware ecosystem.",
-    href: officialModelUrls["accelerator-model"],
-    external: true,
+    href: getModelHref("accelerator-model"),
     featured: true,
     audience: {
       investors:
@@ -76,8 +67,7 @@ export const products: Product[] = [
     tagline: "Ownership economics of AI Cloud infrastructure",
     description:
       "Examine the ownership economics of AI Clouds that purchase accelerators and sell bare metal or cloud GPU compute.",
-    href: officialModelUrls["tco-model"],
-    external: true,
+    href: getModelHref("tco-model"),
     featured: true,
     audience: {
       investors:
@@ -100,8 +90,7 @@ export const products: Product[] = [
     tagline: "Critical IT power capacity forecasting",
     description:
       "Understand current and forecast datacenter critical IT power capacity for colocation and hyperscale datacenters.",
-    href: officialModelUrls["datacenter-model"],
-    external: true,
+    href: getModelHref("datacenter-model"),
     includes: [
       "Current and forecast critical IT power capacity",
       "Colocation and hyperscale datacenter coverage",
@@ -116,8 +105,7 @@ export const products: Product[] = [
     tagline: "Semiconductor equipment sales forecasting",
     description:
       "Utilizes a bottoms-up layer-by-layer flow to accurately forecast semiconductor equipment sales.",
-    href: officialModelUrls["wafer-fab-model"],
-    external: true,
+    href: getModelHref("wafer-fab-model"),
     includes: [
       "Bottoms-up wafer capacity modeling",
       "Process node requirements and equipment sales forecasts",
@@ -132,8 +120,7 @@ export const products: Product[] = [
     tagline: "Networking layer of AI infrastructure",
     description:
       "Granular visibility into switches, transceivers, cables, and scale-up/out networks for AI infrastructure.",
-    href: officialModelUrls["ai-networking-model"],
-    external: true,
+    href: getModelHref("ai-networking-model"),
     includes: [
       "Switches, transceivers, cables, AEC/DACs coverage",
       "Scale-up, scale-out, front-end, and out-of-band networks",
@@ -144,147 +131,8 @@ export const products: Product[] = [
   },
 ];
 
-export type IndustryModelEntry = {
-  name: string;
-  tagline: string;
-  description: string;
-  href: string;
-  external?: boolean;
-  featured?: boolean;
-  category: "compute" | "infrastructure" | "supply-chain" | "research";
-};
-
-/** Full industry models catalog — order matches SemiAnalysis institutional offerings. */
-export const industryModelsCatalog: IndustryModelEntry[] = [
-  {
-    name: "Accelerator & HBM",
-    tagline: "Historical and forecast accelerator production",
-    description:
-      "Gauge historical and future accelerator production by company and type, including HBM supply chain and customer shipments.",
-    href: "https://semianalysis.com/accelerator-hbm-model/",
-    external: true,
-    featured: true,
-    category: "compute",
-  },
-  {
-    name: "AI Cloud TCO",
-    tagline: "Ownership economics of AI Cloud infrastructure",
-    description:
-      "Examine the ownership economics of AI Clouds that purchase accelerators and sell bare metal or cloud GPU compute.",
-    href: "https://semianalysis.com/ai-cloud-tco-model/",
-    external: true,
-    featured: true,
-    category: "compute",
-  },
-  {
-    name: "AI Networking",
-    tagline: "Networking layer of AI infrastructure",
-    description:
-      "Granular visibility into switches, transceivers, cables, and scale-up/out networks for AI infrastructure.",
-    href: "https://semianalysis.com/ai-networking-model/",
-    external: true,
-    category: "compute",
-  },
-  {
-    name: "ChipBook",
-    tagline: "Monthly AI & semiconductor industry tracker",
-    description:
-      "Thousands of unique data points distilled into clear, actionable insights for investors and company decision makers.",
-    href: "/products/chipbook",
-    featured: true,
-    category: "research",
-  },
-  {
-    name: "Core Research",
-    tagline: "Institutional semiconductor & AI research",
-    description:
-      "Deep-dive analysis and subscription research across the semiconductor and AI supply chain.",
-    href: "https://semianalysis.com/core-research/",
-    external: true,
-    category: "research",
-  },
-  {
-    name: "Datacenter Industry",
-    tagline: "Critical IT power capacity forecasting",
-    description:
-      "Understand current and forecast datacenter critical IT power capacity for colocation and hyperscale datacenters.",
-    href: "https://semianalysis.com/datacenter-industry-model/",
-    external: true,
-    category: "infrastructure",
-  },
-  {
-    name: "Energy Model",
-    tagline: "Power and energy demand forecasting",
-    description:
-      "Model energy requirements driven by AI accelerator deployments and datacenter buildouts.",
-    href: "https://semianalysis.com/energy-model/",
-    external: true,
-    category: "infrastructure",
-  },
-  {
-    name: "Foundry Industry",
-    tagline: "Foundry capacity and node transitions",
-    description:
-      "Bottoms-up visibility into foundry capacity, process nodes, and wafer supply across leading manufacturers.",
-    href: "https://semianalysis.com/foundry-industry-model/",
-    external: true,
-    category: "supply-chain",
-  },
-  {
-    name: "Industrials Model",
-    tagline: "Industrial semiconductor demand",
-    description:
-      "Track semiconductor content and demand across industrial end markets and applications.",
-    href: "https://semianalysis.com/industrials-model/",
-    external: true,
-    category: "supply-chain",
-  },
-  {
-    name: "Memory Model",
-    tagline: "Memory market supply and demand",
-    description:
-      "Forecast memory bit demand, pricing, and supply across DRAM, NAND, and HBM.",
-    href: "https://semianalysis.com/memory-model/",
-    external: true,
-    category: "supply-chain",
-  },
-  {
-    name: "Space DC TCO Model",
-    tagline: "Space datacenter economics",
-    description:
-      "Analyze total cost of ownership for space-based and next-generation datacenter concepts.",
-    href: "https://semianalysis.com/space-dc-tco/",
-    external: true,
-    category: "infrastructure",
-  },
-  {
-    name: "Tokenomics Model",
-    tagline: "AI inference economics",
-    description:
-      "Model token economics, inference costs, and unit economics across AI deployment scenarios.",
-    href: "https://semianalysis.com/tokenomics-model/",
-    external: true,
-    category: "compute",
-  },
-  {
-    name: "VR NVL72 BoM & Power Model",
-    tagline: "Rack-level bill of materials and power",
-    description:
-      "Detailed bill of materials and power analysis for next-generation AI rack architectures.",
-    href: "https://semianalysis.com/vr-nvl72-model/",
-    external: true,
-    category: "compute",
-  },
-  {
-    name: "Wafer Fab Equipment",
-    tagline: "Semiconductor equipment sales forecasting",
-    description:
-      "Bottoms-up layer-by-layer flow to accurately forecast semiconductor equipment sales.",
-    href: "https://semianalysis.com/wafer-fab-model/",
-    external: true,
-    category: "supply-chain",
-  },
-];
+export type { IndustryModelEntry } from "./models";
+export { industryModelsCatalog } from "./models";
 
 export type Article = {
   title: string;

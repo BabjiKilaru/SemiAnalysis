@@ -13,6 +13,7 @@ $investors   = get_post_meta( $post_id, 'sa_investors', true );
 $executives  = get_post_meta( $post_id, 'sa_executives', true );
 $includes    = get_post_meta( $post_id, 'sa_includes', true );
 $includes    = is_array( $includes ) ? $includes : array();
+$cta_href    = ( 'Contact Sales' === $cta_label ) ? '#' : 'mailto:' . $cta_email;
 ?>
 <section class="sa-product-hero">
 	<div class="sa-product-hero__inner">
@@ -23,7 +24,7 @@ $includes    = is_array( $includes ) ? $includes : array();
 		<?php endif; ?>
 		<p class="sa-hero__desc"><?php echo esc_html( get_the_excerpt() ); ?></p>
 		<div class="sa-hero__actions">
-			<a class="sa-btn sa-btn--primary" href="<?php echo esc_url( 'mailto:' . $cta_email ); ?>">
+			<a class="sa-btn sa-btn--primary" href="<?php echo esc_url( $cta_href ); ?>">
 				<?php echo esc_html( $cta_label ); ?>
 			</a>
 			<a class="sa-btn sa-btn--secondary" href="<?php echo esc_url( home_url( '/models/' ) ); ?>">
@@ -81,10 +82,14 @@ $includes    = is_array( $includes ) ? $includes : array();
 	<div class="sa-cta-band">
 		<h2 class="sa-cta-band__title">Get started with <?php the_title(); ?></h2>
 		<p class="sa-hero__desc">
-			Reach out to <?php echo esc_html( $cta_email ); ?> to learn about pricing and subscription options.
+			<?php if ( 'Contact Sales' === $cta_label ) : ?>
+				Contact our sales team to learn about pricing and subscription options.
+			<?php else : ?>
+				Reach out to <?php echo esc_html( $cta_email ); ?> to learn about pricing and subscription options.
+			<?php endif; ?>
 		</p>
 		<div class="sa-hero__actions">
-			<a class="sa-btn sa-btn--primary" href="<?php echo esc_url( 'mailto:' . $cta_email ); ?>">
+			<a class="sa-btn sa-btn--primary" href="<?php echo esc_url( $cta_href ); ?>">
 				<?php echo esc_html( $cta_label ); ?>
 			</a>
 		</div>

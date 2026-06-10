@@ -7,7 +7,6 @@ import { Container } from "@/components/shared/Container";
 import { Logo } from "./Logo";
 import { MobileNav } from "./MobileNav";
 import { navLinks, SITE } from "@/lib/site";
-import { officialModelUrls } from "@/lib/content";
 
 export function Header() {
   const ref = useRef<HTMLElement>(null);
@@ -109,16 +108,6 @@ export function Footer() {
                   <Link href="/models" className="text-[var(--sa-text-muted)] hover:text-[var(--sa-amber)]">
                     Industry Models
                   </Link>
-                </li>
-                <li>
-                  <a
-                    href={officialModelUrls["accelerator-model"]}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-[var(--sa-text-muted)] hover:text-[var(--sa-amber)]"
-                  >
-                    Accelerator Model
-                  </a>
                 </li>
               </ul>
             </div>

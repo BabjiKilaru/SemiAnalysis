@@ -71,7 +71,7 @@ export function StickySalesBar() {
 
             <div className="flex shrink-0 items-center gap-2">
               <Button
-                href={`mailto:${SITE.salesEmail}`}
+                href={SITE.contactSalesUrl}
                 className="!px-4 !py-2 !text-xs sm:!text-sm"
               >
                 Contact Sales

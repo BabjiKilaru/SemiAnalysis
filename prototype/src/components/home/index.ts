@@ -1,3 +1,3 @@
-export { ChipBookFeature, ChipBookHeroShowcase, ReportMockup } from "./ChipBookFeature";
+export { ChipBookFeature } from "./ChipBookFeature";
 export { HeroShowcase } from "./HeroShowcase";
 export { IndustryModelsShowcase } from "./IndustryModelsShowcase";
