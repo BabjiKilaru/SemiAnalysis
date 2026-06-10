@@ -24,7 +24,7 @@ export function HeroShowcase() {
   }, []);
 
   return (
-    <div className="w-full max-w-4xl">
+    <div className="w-full max-w-2xl lg:max-w-none">
       <HeroReveal delay={0.1}>
         <p className="flex items-center gap-2 text-sm font-medium uppercase tracking-widest text-[var(--sa-amber)]">
           <span className="sa-pulse-dot inline-block h-2 w-2 rounded-full bg-[var(--sa-amber)]" />
@@ -33,7 +33,7 @@ export function HeroShowcase() {
       </HeroReveal>
 
       <HeroReveal delay={0.22}>
-        <h1 className="mt-5 text-[clamp(2.35rem,5.5vw,4.25rem)] font-bold leading-[1.08] tracking-tight">
+        <h1 className="mt-4 text-[clamp(2rem,4.8vw,3.75rem)] font-bold leading-[1.08] tracking-tight">
           Bridging{" "}
           <span className="relative inline-flex h-[1.12em] min-w-[10.5em] overflow-hidden align-bottom md:min-w-[11.5em]">
             <AnimatePresence mode="wait">
@@ -60,7 +60,7 @@ export function HeroShowcase() {
       </HeroReveal>
 
       <HeroReveal delay={0.38}>
-        <p className="mt-6 max-w-2xl text-lg leading-relaxed text-[var(--sa-text-muted)] md:text-xl">
+        <p className="mt-4 max-w-2xl text-base leading-relaxed text-[var(--sa-text-muted)] md:mt-5 md:text-lg">
           Institutional-grade models and research for investors, AI infrastructure
           teams, enterprise buyers, and researchers navigating the semiconductor
           and AI landscape.
@@ -68,7 +68,7 @@ export function HeroShowcase() {
       </HeroReveal>
 
       <HeroReveal delay={0.52}>
-        <div className="mt-10 flex flex-wrap gap-4">
+        <div className="mt-6 flex flex-wrap gap-4 md:mt-8">
           <Button href="/models">Explore Industry Models</Button>
           <Button href="/products/chipbook" variant="secondary">
             View ChipBook

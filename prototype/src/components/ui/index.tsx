@@ -158,40 +158,6 @@ export function SectionHeading({
   );
 }
 
-export function CTABand({
-  title,
-  description,
-  primaryHref,
-  primaryLabel,
-  secondaryHref,
-  secondaryLabel,
-}: {
-  title: string;
-  description: string;
-  primaryHref: string;
-  primaryLabel: string;
-  secondaryHref?: string;
-  secondaryLabel?: string;
-}) {
-  return (
-    <div className="sa-glow-border relative overflow-hidden rounded-2xl bg-gradient-to-br from-[var(--sa-bg-card)] to-[var(--sa-bg-elevated)] px-8 py-12 md:px-12">
-      <div className="pointer-events-none absolute -right-20 -top-20 h-60 w-60 rounded-full bg-[var(--sa-amber)]/10 blur-[60px]" />
-      <div className="relative">
-        <h2 className="text-2xl font-bold md:text-3xl">{title}</h2>
-        <p className="mt-3 max-w-xl text-[var(--sa-text-muted)]">{description}</p>
-        <div className="mt-8 flex flex-wrap gap-4">
-          <Button href={primaryHref}>{primaryLabel}</Button>
-          {secondaryHref && secondaryLabel && (
-            <Button href={secondaryHref} variant="secondary">
-              {secondaryLabel}
-            </Button>
-          )}
-        </div>
-      </div>
-    </div>
-  );
-}
-
 export function NewsletterSubscribeBand({
   subscribeHref,
 }: {
@@ -218,34 +184,3 @@ export function NewsletterSubscribeBand({
   );
 }
 
-export function ValueCard({
-  title,
-  body,
-  accent,
-  delay = 0,
-}: {
-  title: string;
-  body: string;
-  accent: string;
-  delay?: number;
-}) {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-40px" }}
-      transition={{ duration: 0.55, delay, ease: [0.21, 0.47, 0.32, 0.98] }}
-      whileHover={{ y: -4 }}
-      className="sa-card-glow group rounded-xl border border-[var(--sa-border)] p-6"
-    >
-      <div
-        className="sa-accent-line mb-4 h-1 rounded"
-        style={{ background: accent, animationDelay: `${delay}s` }}
-      />
-      <h3 className="text-lg font-semibold transition-colors group-hover:text-[var(--sa-amber)]">
-        {title}
-      </h3>
-      <p className="mt-2 text-sm leading-relaxed text-[var(--sa-text-muted)]">{body}</p>
-    </motion.div>
-  );
-}

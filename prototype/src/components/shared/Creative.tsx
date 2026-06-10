@@ -99,12 +99,3 @@ export function HeroBackground() {
   );
 }
 
-export function GlowOrb({ className = "" }: { className?: string }) {
-  return (
-    <motion.div
-      className={`absolute rounded-full blur-3xl ${className}`}
-      animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.5, 0.3] }}
-      transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-    />
-  );
-}

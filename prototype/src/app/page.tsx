@@ -6,6 +6,7 @@ import { ArticleCarousel } from "@/components/articles";
 import {
   ChipBookFeature,
   HeroShowcase,
+  HeroVisual,
   IndustryModelsShowcase,
 } from "@/components/home";
 import { ConversionBand, FunnelPath, WhySemiAnalysis } from "@/components/marketing";
@@ -21,16 +22,19 @@ export default async function HomePage() {
 
   return (
     <>
-      {/* Hero — fills first screen; ticker pinned to bottom */}
-      <section className="relative flex min-h-[calc(100dvh-4rem)] w-full flex-col overflow-hidden border-b border-[var(--sa-border)]">
+      {/* Hero — one viewport: headline, visual, stats, ticker */}
+      <section className="relative flex h-[calc(100dvh-4rem)] w-full min-h-0 flex-col overflow-hidden border-b border-[var(--sa-border)]">
         <HeroBackground />
-        <Container className="relative flex flex-1 flex-col justify-center pt-16 md:pt-20">
-          <HeroShowcase />
+        <HeroVisual />
+        <Container className="relative z-10 grid min-h-0 flex-1 grid-rows-[1fr_auto] pt-6 md:pt-8 lg:pt-10">
+          <div className="flex h-full min-h-0 items-center">
+            <HeroShowcase />
+          </div>
 
-          {/* Stats — spread row, sits above ticker */}
+          {/* Stats — pinned above ticker */}
           <SpreadRow
             as="dl"
-            className="mt-auto border-t border-[var(--sa-border)] pt-8 pb-6 md:pt-10"
+            className="shrink-0 border-t border-[var(--sa-border)] pt-5 pb-4 md:pt-6"
           >
             {[
               { label: "Industry Models", value: "14" },
@@ -43,7 +47,9 @@ export default async function HomePage() {
           </SpreadRow>
         </Container>
 
-        <IndustryTicker />
+        <div className="relative z-10">
+          <IndustryTicker />
+        </div>
       </section>
 
       <FunnelPath />

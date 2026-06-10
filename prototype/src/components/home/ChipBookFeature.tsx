@@ -2,9 +2,8 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { FadeUp, StaggerGrid, StaggerItem } from "@/components/shared";
+import { Container, FadeUp, StaggerGrid, StaggerItem } from "@/components/shared";
 import { Button, SectionHeading } from "@/components/ui";
-import { Container } from "@/components/shared";
 import { SITE } from "@/lib/site";
 import type { Product } from "@/lib/content";
 
@@ -14,7 +13,7 @@ const metrics = [
   { value: "Monthly", label: "Analyst calls" },
 ];
 
-export function ReportMockup() {
+function ReportMockup() {
   return (
     <div className="relative mx-auto flex h-[22rem] w-full max-w-[15rem] items-center justify-center [perspective:900px] sm:h-[24rem] lg:mx-0">
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(247,176,65,0.12)_0%,transparent_65%)]" />
@@ -69,108 +68,6 @@ export function ReportMockup() {
             <p className="text-[9px] uppercase tracking-wider text-[var(--sa-metal)]">
               Accelerator shipments · Foundry mix · Power demand
             </p>
-          </div>
-        </div>
-      </motion.div>
-    </div>
-  );
-}
-
-const issueSections = [
-  { label: "Core industry trackers", accent: "var(--sa-amber)" },
-  { label: "Timely datasets", accent: "var(--sa-cobalt)" },
-  { label: "Model insights", accent: "var(--sa-mint)" },
-  { label: "Equity references", accent: "var(--sa-coral)" },
-];
-
-export function ChipBookHeroShowcase() {
-  return (
-    <div className="relative mx-auto flex h-[20rem] w-full max-w-[16rem] items-center justify-center [perspective:1000px] sm:h-[22rem] sm:max-w-[17rem]">
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(247,176,65,0.14)_0%,transparent_68%)]" />
-
-      <motion.div
-        className="absolute h-[16rem] w-[11.5rem] rounded-lg border border-[var(--sa-border)] bg-[var(--sa-bg-elevated)]/80 sm:h-[17rem] sm:w-[12rem]"
-        style={{ rotateY: -22, rotateZ: -8, translateZ: -50 }}
-        animate={{ y: [0, -3, 0] }}
-        transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut" }}
-      />
-      <motion.div
-        className="absolute h-[16.5rem] w-[11.75rem] rounded-lg border border-[var(--sa-border)] bg-[var(--sa-bg-card)]/90 sm:h-[17.5rem] sm:w-[12.25rem]"
-        style={{ rotateY: -12, rotateZ: -4, translateZ: -25 }}
-        animate={{ y: [0, -5, 0] }}
-        transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 0.15 }}
-      />
-
-      <motion.div
-        className="relative h-[17rem] w-[12.25rem] overflow-hidden rounded-xl border border-[var(--sa-amber)]/35 bg-gradient-to-br from-[var(--sa-bg-card)] via-[#1a1712] to-[var(--sa-bg)] shadow-[0_28px_60px_-22px_rgba(247,176,65,0.25)] sm:h-[18rem] sm:w-[12.75rem]"
-        style={{ transformStyle: "preserve-3d" }}
-        animate={{ y: [0, -7, 0], rotateY: [-5, 5, -5] }}
-        transition={{ duration: 6.5, repeat: Infinity, ease: "easeInOut" }}
-        whileHover={{ scale: 1.03, rotateY: 0 }}
-      >
-        <div className="absolute inset-0 bg-[linear-gradient(155deg,rgba(247,176,65,0.18)_0%,transparent_42%)]" />
-        <div
-          className="absolute inset-0 opacity-[0.12]"
-          style={{
-            backgroundImage:
-              "radial-gradient(circle at 1px 1px, rgba(247,176,65,0.5) 1px, transparent 0)",
-            backgroundSize: "10px 10px",
-          }}
-        />
-
-        <div className="relative flex h-full flex-col p-4 sm:p-5">
-          <div className="flex items-center justify-between gap-2">
-            <span className="sa-shimmer rounded-full px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wider text-[var(--sa-amber)]">
-              May 2026
-            </span>
-            <span className="text-[9px] font-medium text-[var(--sa-metal)]">Issue 24</span>
-          </div>
-
-          <p className="mt-4 text-[9px] font-semibold uppercase tracking-[0.22em] text-[var(--sa-cobalt)]">
-            SemiAnalysis
-          </p>
-          <h3 className="mt-1 text-[1.65rem] font-bold leading-none tracking-tight sm:text-[1.85rem]">
-            Chip<span className="text-[var(--sa-amber)]">Book</span>
-          </h3>
-
-          <div className="mt-4 space-y-2 border-t border-white/10 pt-3">
-            <p className="text-[8px] font-semibold uppercase tracking-[0.18em] text-[var(--sa-metal)]">
-              This month
-            </p>
-            {issueSections.map((section, i) => (
-              <motion.div
-                key={section.label}
-                initial={{ opacity: 0, x: -8 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.4 + i * 0.08, duration: 0.5 }}
-                className="flex items-center gap-2"
-              >
-                <span
-                  className="h-1.5 w-1.5 shrink-0 rounded-full"
-                  style={{ background: section.accent, boxShadow: `0 0 8px color-mix(in srgb, ${section.accent} 50%, transparent)` }}
-                />
-                <span className="truncate text-[10px] text-[var(--sa-text-muted)]">{section.label}</span>
-                <span className="ml-auto h-px flex-1 max-w-[2.5rem] bg-[var(--sa-border)]" />
-              </motion.div>
-            ))}
-          </div>
-
-          <div className="mt-auto flex items-end justify-between border-t border-white/10 pt-3">
-            <div className="grid grid-cols-4 gap-1">
-              {Array.from({ length: 12 }).map((_, i) => (
-                <span
-                  key={i}
-                  className="h-1.5 w-1.5 rounded-[1px]"
-                  style={{
-                    background: i % 3 === 0 ? "var(--sa-amber)" : i % 3 === 1 ? "var(--sa-cobalt)" : "var(--sa-mint)",
-                    opacity: 0.25 + (i % 4) * 0.15,
-                  }}
-                />
-              ))}
-            </div>
-            <span className="text-[8px] font-medium uppercase tracking-wider text-[var(--sa-metal)]">
-              35–50 pg
-            </span>
           </div>
         </div>
       </motion.div>

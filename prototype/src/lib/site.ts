@@ -6,11 +6,9 @@ export const SITE = {
   newsletterArchiveUrl: "https://newsletter.semianalysis.com/archive",
   chipbookSampleUrl:
     "https://semianalysis.com/wp-content/uploads/2026/02/Sample-Chipbook.pdf",
-  researchUrl: "https://www.semianalysis.com",
   modelsResearchUrl: "https://semianalysis.com/models-research/",
   eventsUrl: "https://semianalysis.com/semianalysis-events/",
   careersUrl: "https://semianalysis.com/semianalysis-careers/",
-  salesEmail: "sales@semianalysis.com",
   /** Placeholder until on-site contact form URL is wired. */
   contactSalesUrl: "#",
   chipbookSalesEmail: "ChipBookSales@SemiAnalysis.com",
