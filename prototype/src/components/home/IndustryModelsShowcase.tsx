@@ -89,12 +89,12 @@ function wrapOffset(index: number, activeIndex: number, count: number): number {
 function cardTransform(offset: number) {
   const abs = Math.abs(offset);
   return {
-    rotateY: offset * -38,
-    x: offset * 98,
-    z: -abs * 72,
-    scale: 1 - abs * 0.06,
-    opacity: abs > 2 ? 0 : 1 - abs * 0.2,
-    zIndex: 10 - abs,
+    rotateY: offset * -34,
+    x: offset * 104,
+    z: -abs * 88,
+    scale: 1 - abs * 0.05,
+    opacity: abs > 2 ? 0 : 1,
+    zIndex: 20 - abs,
   };
 }
 
@@ -193,7 +193,7 @@ function ModelCoverCard({
 
   return (
     <motion.div
-      className="absolute top-1/2 left-1/2 cursor-pointer [transform-style:preserve-3d]"
+      className="absolute top-1/2 left-1/2 cursor-pointer [transform-style:preserve-3d] [backface-visibility:hidden]"
       style={{
         width: CARD_W,
         height: CARD_H,
@@ -215,12 +215,14 @@ function ModelCoverCard({
       {isActive ? (
         <Link
           href={product.href}
-          className="sa-card-glow relative block h-full overflow-hidden rounded-xl border border-white/15 bg-[var(--sa-bg-card)] shadow-[0_24px_60px_-20px_rgba(0,0,0,0.8)]"
+          className="sa-card-glow relative block h-full overflow-hidden rounded-xl border border-white/15 bg-[var(--sa-bg-card)] shadow-[0_24px_60px_-20px_rgba(0,0,0,0.8)] [backface-visibility:hidden]"
         >
           {inner}
         </Link>
       ) : (
-        <div className="relative h-full overflow-hidden rounded-xl border border-white/10 bg-[var(--sa-bg-card)] shadow-[0_16px_40px_-20px_rgba(0,0,0,0.7)]">
+        <div
+          className={`relative h-full overflow-hidden rounded-xl border border-white/10 bg-[var(--sa-bg-card)] shadow-[0_16px_40px_-20px_rgba(0,0,0,0.7)] [backface-visibility:hidden] ${!isActive ? "brightness-[0.82]" : ""}`}
+        >
           {inner}
         </div>
       )}
@@ -298,11 +300,15 @@ export function IndustryModelsShowcase({ models }: { models: Product[] }) {
               <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(247,176,65,0.05)_0%,_transparent_60%)]" />
 
               <div className="relative h-full [transform-style:preserve-3d]">
-                {models.map((product, index) => {
-                  const offset = wrapOffset(index, activeIndex, count);
-                  if (Math.abs(offset) > 2) return null;
-
-                  return (
+                {models
+                  .map((product, index) => ({
+                    product,
+                    index,
+                    offset: wrapOffset(index, activeIndex, count),
+                  }))
+                  .filter(({ offset }) => Math.abs(offset) <= 2)
+                  .sort((a, b) => Math.abs(b.offset) - Math.abs(a.offset))
+                  .map(({ product, index, offset }) => (
                     <ModelCoverCard
                       key={product.slug}
                       product={product}
@@ -310,8 +316,7 @@ export function IndustryModelsShowcase({ models }: { models: Product[] }) {
                       isActive={offset === 0}
                       onSelect={() => goTo(index)}
                     />
-                  );
-                })}
+                  ))}
               </div>
             </div>
 
