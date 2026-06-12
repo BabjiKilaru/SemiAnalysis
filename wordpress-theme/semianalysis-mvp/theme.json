@@ -75,6 +75,8 @@
   ],
   "customTemplates": [
     { "name": "page-models", "title": "Models Hub", "postTypes": ["page"] },
+    { "name": "page-about", "title": "About", "postTypes": ["page"] },
+    { "name": "page-contact", "title": "Contact", "postTypes": ["page"] },
     { "name": "single-sa_product", "title": "Product", "postTypes": ["sa_product"] }
   ]
 }

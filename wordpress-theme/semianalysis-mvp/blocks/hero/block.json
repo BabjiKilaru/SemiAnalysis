@@ -13,7 +13,7 @@
     "accentWord": { "type": "string", "default": " and business" },
     "description": {
       "type": "string",
-      "default": "Institutional-grade models and research for investors, AI infrastructure teams, enterprise buyers, and researchers."
+      "default": "Institutional-grade models and research for investors, AI infrastructure teams, enterprise buyers, and researchers navigating the semiconductor and AI landscape."
     },
     "primaryLabel": { "type": "string", "default": "Explore Industry Models" },
     "primaryUrl": { "type": "string", "default": "/models/" },

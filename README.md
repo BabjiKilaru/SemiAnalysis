@@ -28,6 +28,8 @@ Open [http://localhost:3000](http://localhost:3000).
 
 **Pages:** `/` · `/models` · `/products/chipbook` · `/about`
 
+WordPress theme mirrors the same routes when activated in LocalWP.
+
 ## Live deployment
 
 The Next.js prototype is deployed on Vercel and **auto-deploys on every push to `main`**:
@@ -61,20 +63,22 @@ See [wordpress-theme/README.md](wordpress-theme/README.md) for details.
 
 | Block | Purpose |
 |-------|---------|
-| `sa/hero` | Homepage hero |
-| `sa/stats` | Stats row (6+ models, 125+ datasets…) |
-| `sa/ticker` | Industry terms marquee |
-| `sa/product-grid` | Product cards from CPT |
-| `sa/article-cards` | Substack links |
-| `sa/value-props` | Why SemiAnalysis section |
-| `sa/cta-band` | Conversion footer |
-| `sa/product-single` | Full product landing layout |
+| `sa/hero` | Full-viewport hero + background visual |
+| `sa/funnel-path` | How-it-works funnel |
+| `sa/industry-models` | Homepage models showcase |
+| `sa/chipbook-feature` | ChipBook section |
+| `sa/model-catalog` | Models page + overlay |
+| `sa/about` | About page |
+| `sa/article-cards` | Live Substack RSS |
+| `sa/value-props` | Why SemiAnalysis |
+| `sa/cta-band` | Conversion band |
+| `sa/product-single` | Product landing layout |
 
 ## Deliverables checklist
 
 - [x] Next.js prototype with animations
-- [x] WordPress block theme with custom blocks
-- [ ] Tested on LocalWP
+- [x] WordPress block theme (prototype parity)
+- [ ] Tested on LocalWP (activate theme and verify routes)
 - [ ] Public GitHub repository
 - [ ] Walkthrough video
 - [ ] Daily Slack progress updates

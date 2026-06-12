@@ -1,17 +1,9 @@
 <?php
-/**
- * Register sa_product custom post type.
- *
- * @package SemiAnalysis_MVP
- */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-/**
- * Register Products CPT for models and ChipBook.
- */
 function sa_mvp_register_product_cpt() {
 	register_post_type(
 		'sa_product',
@@ -32,9 +24,6 @@ function sa_mvp_register_product_cpt() {
 }
 add_action( 'init', 'sa_mvp_register_product_cpt' );
 
-/**
- * Register product meta fields.
- */
 function sa_mvp_register_product_meta() {
 	$fields = array(
 		'sa_tagline'    => 'string',

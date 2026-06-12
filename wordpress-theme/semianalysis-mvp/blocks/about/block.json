@@ -1,0 +1,11 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "sa/about",
+  "title": "SA About Page",
+  "category": "semianalysis",
+  "icon": "info",
+  "description": "About SemiAnalysis page content.",
+  "supports": { "html": false },
+  "render": "file:./render.php"
+}

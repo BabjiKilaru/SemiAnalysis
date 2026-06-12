@@ -1,9 +1,4 @@
 <?php
-/**
- * Funnel path block render.
- *
- * @package SemiAnalysis_MVP
- */
 
 $title = $attributes['title'] ?? 'From free research to institutional access';
 
@@ -39,7 +34,7 @@ $steps = array(
 		'body'    => 'Contact sales for model subscriptions, demos, and institutional pricing.',
 		'primary' => array(
 			'label' => 'Contact Sales',
-			'url'   => '#',
+			'url'   => sa_mvp_contact_sales_url(),
 			'class' => 'sa-btn--primary',
 		),
 		'secondary' => array(
@@ -51,10 +46,12 @@ $steps = array(
 );
 ?>
 <section class="sa-section sa-section--elevated sa-funnel">
-	<p class="sa-funnel__eyebrow">How it works</p>
-	<h2 class="sa-funnel__title"><?php echo esc_html( $title ); ?></h2>
+	<div class="sa-funnel__header sa-reveal">
+		<p class="sa-funnel__eyebrow">How it works</p>
+		<h2 class="sa-funnel__title"><?php echo esc_html( $title ); ?></h2>
+	</div>
 
-	<div class="sa-funnel__grid">
+	<div class="sa-funnel__grid sa-reveal--stagger">
 		<?php foreach ( $steps as $i => $step ) : ?>
 			<article class="sa-funnel__step">
 				<?php if ( $i < count( $steps ) - 1 ) : ?>

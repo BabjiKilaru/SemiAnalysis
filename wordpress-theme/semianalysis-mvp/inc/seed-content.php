@@ -1,17 +1,9 @@
 <?php
-/**
- * Seed demo products on theme activation.
- *
- * @package SemiAnalysis_MVP
- */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-/**
- * Create default product posts if none exist.
- */
 function sa_mvp_seed_products() {
 	if ( get_option( 'sa_mvp_seeded' ) ) {
 		return;
@@ -141,7 +133,6 @@ function sa_mvp_seed_products() {
 		}
 	}
 
-	// Create Models page.
 	$models_page = wp_insert_post(
 		array(
 			'post_type'    => 'page',
@@ -156,7 +147,6 @@ function sa_mvp_seed_products() {
 		update_post_meta( $models_page, '_wp_page_template', 'page-models' );
 	}
 
-	// Create Home page and set as front page.
 	$home_page = wp_insert_post(
 		array(
 			'post_type'    => 'page',
@@ -172,6 +162,53 @@ function sa_mvp_seed_products() {
 		update_option( 'page_on_front', $home_page );
 	}
 
+	$about_page = wp_insert_post(
+		array(
+			'post_type'    => 'page',
+			'post_title'   => 'About',
+			'post_name'    => 'about',
+			'post_status'  => 'publish',
+			'post_content' => '',
+		)
+	);
+
+	if ( $about_page && ! is_wp_error( $about_page ) ) {
+		update_post_meta( $about_page, '_wp_page_template', 'page-about' );
+	}
+
+	sa_mvp_ensure_contact_page();
+
 	update_option( 'sa_mvp_seeded', 1 );
 }
 add_action( 'after_switch_theme', 'sa_mvp_seed_products' );
+
+function sa_mvp_ensure_contact_page() {
+	if ( get_option( 'sa_mvp_contact_page_v1' ) ) {
+		return;
+	}
+
+	$existing = get_page_by_path( 'contact' );
+
+	if ( $existing ) {
+		update_post_meta( $existing->ID, '_wp_page_template', 'page-contact' );
+		update_option( 'sa_mvp_contact_page_v1', 1 );
+		return;
+	}
+
+	$contact_page = wp_insert_post(
+		array(
+			'post_type'    => 'page',
+			'post_title'   => 'Contact',
+			'post_name'    => 'contact',
+			'post_status'  => 'publish',
+			'post_content' => '',
+		)
+	);
+
+	if ( $contact_page && ! is_wp_error( $contact_page ) ) {
+		update_post_meta( $contact_page, '_wp_page_template', 'page-contact' );
+	}
+
+	update_option( 'sa_mvp_contact_page_v1', 1 );
+}
+add_action( 'init', 'sa_mvp_ensure_contact_page' );

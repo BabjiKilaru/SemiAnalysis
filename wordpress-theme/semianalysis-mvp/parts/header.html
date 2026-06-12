@@ -6,23 +6,35 @@
 		<a href="/" class="sa-logo sa-logo--image">
 			<img src="/wp-content/themes/semianalysis-mvp/assets/images/semianalysis-logo.png" alt="SemiAnalysis" width="180" height="40" />
 		</a>
-		<!-- /wp:html -->
 
-		<!-- wp:html -->
 		<nav class="sa-header__nav" aria-label="Main">
+			<a href="/">Home</a>
 			<a href="/models/">Industry Models</a>
 			<a href="/products/chipbook/">ChipBook</a>
-			<a href="https://newsletter.semianalysis.com" target="_blank" rel="noopener noreferrer">Research</a>
+			<a href="https://newsletter.semianalysis.com/archive" target="_blank" rel="noopener noreferrer">Archives</a>
+			<a href="/about/">About</a>
+			<a href="https://semianalysis.com/semianalysis-events/" target="_blank" rel="noopener noreferrer">Events</a>
 			<a href="https://semianalysis.com/semianalysis-careers/" target="_blank" rel="noopener noreferrer">Careers</a>
 		</nav>
-		<!-- /wp:html -->
 
-		<!-- wp:html -->
 		<div class="sa-header__actions">
-			<a class="sa-header__login" href="https://semianalysis.com/wp-json/passport/v1/oauth/authlogin?signup_redirect_uri=https%3A%2F%2Fsemianalysis.com%2Fverify-your-email%2F">Log in</a>
-			<a class="sa-header__subscribe" href="https://newsletter.semianalysis.com/subscribe" target="_blank" rel="noopener noreferrer">Subscribe</a>
-			<a class="sa-btn sa-btn--primary sa-header__cta" href="/models/">Explore Models</a>
+			<a class="sa-header__login sa-btn-lift" href="https://semianalysis.com/wp-json/passport/v1/oauth/authlogin?signup_redirect_uri=https%3A%2F%2Fsemianalysis.com%2Fverify-your-email%2F">Log in</a>
+			<a class="sa-header__subscribe sa-btn-lift" href="https://newsletter.semianalysis.com/subscribe" target="_blank" rel="noopener noreferrer">Subscribe</a>
+			<button type="button" class="sa-header__menu-btn" data-sa-menu-toggle aria-expanded="false" aria-controls="sa-mobile-nav" aria-label="Open menu">
+				<span></span><span></span><span></span>
+			</button>
 		</div>
+
+		<nav id="sa-mobile-nav" class="sa-mobile-nav" aria-hidden="true" aria-label="Mobile">
+			<a href="/">Home</a>
+			<a href="/models/">Industry Models</a>
+			<a href="/products/chipbook/">ChipBook</a>
+			<a href="https://newsletter.semianalysis.com/archive" target="_blank" rel="noopener noreferrer">Archives</a>
+			<a href="/about/">About</a>
+			<a href="https://semianalysis.com/semianalysis-events/" target="_blank" rel="noopener noreferrer">Events</a>
+			<a href="https://semianalysis.com/semianalysis-careers/" target="_blank" rel="noopener noreferrer">Careers</a>
+			<a class="sa-btn sa-btn--primary sa-btn--sm" href="https://newsletter.semianalysis.com/subscribe" target="_blank" rel="noopener noreferrer">Subscribe</a>
+		</nav>
 		<!-- /wp:html -->
 	</div>
 	<!-- /wp:group -->

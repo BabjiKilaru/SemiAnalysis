@@ -1,0 +1,19 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "sa/industry-models",
+  "title": "SA Industry Models Showcase",
+  "category": "semianalysis",
+  "icon": "grid-view",
+  "description": "Featured industry model cards linking to the models catalog.",
+  "supports": { "html": false },
+  "attributes": {
+    "eyebrow": { "type": "string", "default": "Industry Models" },
+    "title": { "type": "string", "default": "Industry Models" },
+    "description": {
+      "type": "string",
+      "default": "Proprietary models for investors and hyperscalers — click a card to view details on SemiAnalysis, or contact sales for institutional access."
+    }
+  },
+  "render": "file:./render.php"
+}

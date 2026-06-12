@@ -1,0 +1,11 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "sa/contact",
+  "title": "SA Contact Page",
+  "category": "semianalysis",
+  "icon": "email",
+  "description": "Contact page hero and inquiry form.",
+  "supports": { "html": false },
+  "render": "file:./render.php"
+}

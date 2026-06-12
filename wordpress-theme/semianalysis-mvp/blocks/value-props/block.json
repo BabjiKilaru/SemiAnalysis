@@ -5,7 +5,7 @@
   "title": "SA Value Props",
   "category": "semianalysis",
   "icon": "star-filled",
-  "description": "Why SemiAnalysis three-column value section.",
+  "description": "Why SemiAnalysis bento section with scroll reveals and animated cards.",
   "supports": { "html": false },
   "attributes": {
     "eyebrow": { "type": "string", "default": "Why SemiAnalysis" },

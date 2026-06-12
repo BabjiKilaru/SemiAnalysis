@@ -11,10 +11,10 @@
     "title": { "type": "string", "default": "Ready to subscribe?" },
     "description": {
       "type": "string",
-      "default": "Get pricing, demos, and access to proprietary models — or start with ChipBook, our monthly industry tracker."
+      "default": "Get pricing, demos, and access to proprietary models — or start with ChipBook, our monthly industry tracker trusted by leading funds and semiconductor companies."
     },
     "primaryLabel": { "type": "string", "default": "Contact Sales" },
-    "primaryUrl": { "type": "string", "default": "#" },
+    "primaryUrl": { "type": "string", "default": "/contact/" },
     "secondaryLabel": { "type": "string", "default": "Buy ChipBook" },
     "secondaryUrl": { "type": "string", "default": "mailto:ChipBookSales@SemiAnalysis.com" },
     "tertiaryLabel": { "type": "string", "default": "Browse Models" },
