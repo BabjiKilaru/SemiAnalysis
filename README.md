@@ -273,7 +273,7 @@ Full theme docs: [wordpress-theme/README.md](wordpress-theme/README.md).
 
 ### Prototype (Vercel)
 
-Live preview: **https://prototype-black-ten.vercel.app**
+Live preview: **https://semianalysis-prototype.vercel.app/**
 
 Auto-deploys on push to `main` from the `prototype/` directory.
 
@@ -353,6 +353,7 @@ Shared across both implementations:
 | Document | Scope |
 |----------|-------|
 | [README.md](README.md) | This file — monorepo overview |
+| [PROGRESS.md](PROGRESS.md) | Day 1–7 build log |
 | [wordpress-theme/README.md](wordpress-theme/README.md) | Block theme architecture, blocks, PHP modules, troubleshooting |
 
 ---
@@ -366,10 +367,4 @@ Shared across both implementations:
 | Database | — | MySQL 5.7+ / MariaDB 10.3+ |
 | Build tools | npm | None |
 
----
 
-## License
-
-WordPress theme: GPL v2 or later (standard WordPress theme license).
-
-Prototype: private MVP — see repository for terms.
